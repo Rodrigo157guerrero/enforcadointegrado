@@ -13,7 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private Button b;
+    private Button b, b1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +27,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
         b = findViewById(R.id.id1);
         b.setOnClickListener(this);
+
+        b1 = findViewById(R.id.miguel);
+        b1.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        startActivity(new Intent(this, TelaJogo.class));
+        if (v == b) {
+            startActivity(new Intent(this, TelaJogo.class));
+        }
+        if (v == b1){
+            startActivity(new Intent(this, TelaJogo.class));
+        }
 
     }
 }

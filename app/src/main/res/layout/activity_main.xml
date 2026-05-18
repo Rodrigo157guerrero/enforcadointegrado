@@ -68,6 +68,12 @@
             android:layout_height="wrap_content"
             android:text="Iniciar"
             android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/miguel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Configurações" />
     </LinearLayout>
 
 </LinearLayout>
