@@ -20,6 +20,8 @@ public class TelaCadastro extends AppCompatActivity implements View.OnClickListe
     private EditText textoDaPalavra;
     private Button btnCadastrar, btnListar;
     private RadioGroup grupo;
+
+    private BD bd;
     private String categoriaSelecionada, palavra;
 
     @Override
@@ -32,6 +34,9 @@ public class TelaCadastro extends AppCompatActivity implements View.OnClickListe
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        bd = new BD(TelaCadastro.this);
+
         textoDaPalavra = findViewById(R.id.textPalavra);
         btnCadastrar = findViewById(R.id.button);
         btnListar = findViewById(R.id.button2);
@@ -45,7 +50,44 @@ public class TelaCadastro extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if(v == btnCadastrar){
 
+            String texto = textoDaPalavra.getText().toString();
+
+
+            boolean temTextoDigitado = false;
+
+            if (texto.isEmpty()){
+                Toast.makeText(this,"ta faltando palavra", Toast.LENGTH_SHORT);
+            } else {
+                temTextoDigitado = true;
+            }
+
+
+            RadioButton r = findViewById(R.id.radioButton);
+            RadioButton r2 = findViewById(R.id.radioButton2);
+            RadioButton r3 = findViewById(R.id.radioButton3);
+            RadioButton r4 = findViewById(R.id.radioButton4);
+            RadioButton r5 = findViewById(R.id.radioButton5);
+
+
+            boolean temRadioChecado = false;
+            if(r.isChecked()||r2.isChecked()||r3.isChecked()||r4.isChecked()||r5.isChecked()){
+                temRadioChecado = true;
+            } else {
+                Toast.makeText(this,"faltou a categoria", Toast.LENGTH_SHORT);
+            }
+            if (temTextoDigitado && temRadioChecado)
+            {
+
+                Palavra palavra1 = new Palavra();
+                palavra1.setPalavraDigitada(texto);
+                bd.salvarPalavra(palavra1);
+
+            }
+
         }
+
+
+
         if(v ==btnListar){
 
         }
@@ -56,7 +98,7 @@ public class TelaCadastro extends AppCompatActivity implements View.OnClickListe
     public void onCheckedChanged(@NonNull RadioGroup group, int checkedId) {
         if(group == grupo){
             RadioButton temporario = findViewById(checkedId);
-            Toast.makeText(TelaCadastro.this, temporario.getText().toString(), Toast.LENGHT_SHORT).show();
+            Toast.makeText(TelaCadastro.this, temporario.getText().toString(),Toast.LENGTH_SHORT).show();
         }
 
     }
